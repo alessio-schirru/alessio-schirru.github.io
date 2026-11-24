@@ -725,7 +725,6 @@ em {
 .legal-bloc p:last-child { margin-bottom: 0; }
 .legal-bloc strong { font-weight: 500; color: var(--couleur-texte); }
 .legal-bloc a { color: var(--couleur-texte); text-underline-offset: 3px; }
-.legal-suite { margin-top: 90px; }
 
 
 /* ---------- 13. Animations ---------- */

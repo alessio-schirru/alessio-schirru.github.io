@@ -23,13 +23,13 @@
   <header class="menu">
     <nav class="menu-pilule verre" aria-label="Menu principal">
       <a href="index.html">~/accueil</a>
-      <a href="index.html#realisations">~/réalisations</a>
-      <a href="index.html#contact">~/contact</a>
-      <a href="mentions-legales.html" class="actif">~/mentions-légales</a>
+      <a href="#mentions" class="actif">~/mentions-légales</a>
+      <a href="#confidentialite">~/confidentialité</a>
     </nav>
   </header>
 
-  <main class="section legal">
+  <main>
+    <section id="mentions" class="section legal">
     <div class="conteneur">
       <p class="chemin">alessio@portfolio:~$ cat mentions-legales.md</p>
       <h1 class="titre-section">Mentions <em>légales</em>.</h1>
@@ -63,9 +63,13 @@
         </section>
 
       </div>
+    </div>
+    </section>
 
-      <p class="chemin legal-suite">alessio@portfolio:~$ cat confidentialite.md</p>
-      <h2 class="titre-section" id="confidentialite">Confidentialité<em>.</em></h2>
+    <section id="confidentialite" class="section">
+    <div class="conteneur">
+      <p class="chemin">alessio@portfolio:~$ cat confidentialite.md</p>
+      <h2 class="titre-section">Confidentialité<em>.</em></h2>
 
       <div class="legal-grille">
 
@@ -93,6 +97,7 @@
 
       </div>
     </div>
+    </section>
   </main>
 
   <footer class="pied">
@@ -103,5 +108,6 @@
   </footer>
 
   <script src="js/ciel.js"></script>
+  <script src="js/interactions.js"></script>
 </body>
 </html>
