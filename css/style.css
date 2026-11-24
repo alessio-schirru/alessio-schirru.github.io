@@ -1,0 +1,757 @@
+/* =========================================================
+   Portfolio Alessio Schirru · Liquid Glass noir et blanc
+   Sommaire :
+   1. Variables (couleurs, polices, tailles)
+   2. Base
+   3. Verre (effet Liquid Glass)
+   4. Menu
+   5. Accueil
+   6. Carte en vedette
+   7. Sections communes
+   8. À propos
+   9. Parcours
+   10. Compétences
+   11. Réalisations (11 bis : détails dépliables)
+   12. Contact et pied de page
+   13. Animations
+   14. Responsive
+   ========================================================= */
+
+
+/* ---------- 1. Variables ---------- */
+:root {
+  /* Couleurs */
+  --couleur-fond: #000000;
+  --couleur-texte: #f2f2f4;
+  --couleur-texte-doux: rgba(255, 255, 255, 0.72);
+  --couleur-texte-faible: rgba(255, 255, 255, 0.5);
+  --couleur-trait: rgba(255, 255, 255, 0.22);
+  --couleur-accent: #ffffff;           /* boutons pleins, voyant, menu actif */
+  --couleur-sur-accent: #000000;       /* texte posé sur l'accent */
+
+  /* Verre */
+  --verre-teinte: rgba(10, 10, 14, 0.35);
+  --verre-flou: 22px;
+
+  /* Polices */
+  --police-texte: "Geist", "Inter", system-ui, sans-serif;
+  --police-serif: "Instrument Serif", "Times New Roman", serif;
+  --police-mono: "Geist Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Tailles */
+  --largeur-max: 1180px;
+  --marge-cote: max(20px, 4vw);
+  --rayon: 26px;
+}
+
+
+/* ---------- 2. Base ---------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px; /* pour que le menu ne cache pas les titres */
+  background: var(--couleur-fond);
+}
+
+body {
+  margin: 0;
+  /* pas de fond ici : sinon il cache le ciel (canvas) placé derrière */
+  color: var(--couleur-texte);
+  font-family: var(--police-texte);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#ciel {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+a { color: inherit; }
+img { max-width: 100%; }
+
+.conteneur {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding-left: var(--marge-cote);
+  padding-right: var(--marge-cote);
+}
+
+.mono { font-family: var(--police-mono); }
+
+em {
+  font-family: var(--police-serif);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--couleur-accent);
+  outline-offset: 3px;
+}
+
+
+/* ---------- 3. Verre (effet Liquid Glass) ---------- */
+.verre {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 45%, rgba(255, 255, 255, 0.07) 100%),
+    var(--verre-teinte);
+  backdrop-filter: blur(var(--verre-flou)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--verre-flou)) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),    /* reflet en haut */
+    inset 1px 0 0 rgba(255, 255, 255, 0.15),   /* reflet à gauche */
+    0 24px 60px rgba(0, 0, 0, 0.5);            /* ombre portée */
+}
+
+/* Bord brillant : plus clair en haut à gauche, comme une vraie vitre */
+.verre::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.08) 35%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0.3));
+  /* Le masque ne garde que le contour de 1px : c'est ce qui dessine le bord brillant */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;   /* anciens Safari */
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;       /* version standard */
+}
+
+
+/* ---------- 4. Menu ---------- */
+.menu {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.menu-pilule {
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 999px;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu-pilule::-webkit-scrollbar { display: none; }
+
+.menu-pilule a {
+  font-family: var(--police-mono);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: var(--couleur-texte-doux);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.3s, color 0.3s;
+}
+.menu-pilule a:hover { color: var(--couleur-texte); }
+.menu-pilule a.actif {
+  background: var(--couleur-accent);
+  color: var(--couleur-sur-accent);
+}
+
+
+/* ---------- 5. Accueil ---------- */
+.accueil {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  padding-top: 100px;
+  padding-bottom: 56px;
+}
+
+.accueil-contenu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.barre-etat {
+  align-self: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-family: var(--police-mono);
+  font-size: 13px;
+  color: var(--couleur-texte-doux);
+}
+.barre-etat b { font-weight: 400; color: var(--couleur-texte-faible); margin-right: 4px; }
+
+.voyant {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: 1px;
+  background: var(--couleur-accent);
+  box-shadow: 0 0 10px var(--couleur-accent);
+  animation: pulsation 2.4s ease-in-out infinite;
+}
+
+.accueil-bas {
+  margin-top: auto;
+  padding-top: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.accueil-texte { min-width: 0; }
+
+.chemin {
+  font-family: var(--police-mono);
+  font-size: 13px;
+  color: var(--couleur-texte-faible);
+  letter-spacing: 0.03em;
+  margin: 0 0 12px;
+}
+
+.nom {
+  font-weight: 600;
+  font-size: clamp(64px, 11vw, 150px);
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+  margin: 0;
+}
+.nom em { letter-spacing: -0.02em; }
+
+.role {
+  max-width: 34ch;
+  margin: 22px 0 0;
+  font-size: 18px;
+  color: var(--couleur-texte-doux);
+}
+
+.boutons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.bouton {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.3s;
+}
+.bouton:hover { transform: translateY(-2px); }
+.bouton-plein {
+  background: var(--couleur-accent);
+  color: var(--couleur-sur-accent);
+}
+
+
+/* ---------- 6. Carte en vedette ---------- */
+.vedette {
+  flex: 0 0 380px;
+  border-radius: var(--rayon);
+  padding: 20px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.vedette-haut {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--couleur-texte-faible);
+}
+.vedette-chemin span { color: var(--couleur-texte); }
+
+/* Fine barre de progression : indique quand le projet suivant arrive */
+.vedette-barre {
+  height: 1px;
+  margin: 14px 0 18px;
+  background: var(--couleur-trait);
+}
+.vedette-barre span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--couleur-accent);
+  box-shadow: 0 0 8px var(--couleur-accent);
+}
+
+.vedette-diapo { display: none; }
+.vedette-diapo.active { display: block; animation: fondu 0.6s ease; }
+
+.vedette-type {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--couleur-texte-faible);
+}
+.vedette-titre {
+  margin: 8px 0 10px;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.vedette-texte {
+  margin: 0;
+  font-size: 14px;
+  color: var(--couleur-texte-doux);
+}
+.vedette-pile {
+  margin: 14px 0 0;
+  font-size: 12px;
+  color: var(--couleur-texte-faible);
+}
+
+.vedette-bas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--couleur-trait);
+}
+.vedette-points { display: flex; gap: 6px; }
+.point {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--couleur-texte-faible);
+  cursor: pointer;
+  transition: width 0.4s, background 0.4s;
+}
+.point.actif { width: 22px; background: var(--couleur-accent); }
+.vedette-lien {
+  font-family: var(--police-mono);
+  font-size: 12px;
+  color: var(--couleur-texte-doux);
+  text-decoration: none;
+}
+.vedette-lien:hover { color: var(--couleur-texte); }
+
+
+/* ---------- 7. Sections communes ---------- */
+.section { padding: 110px 0; }
+
+.titre-section {
+  font-weight: 600;
+  font-size: clamp(38px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 44px;
+  text-wrap: balance;
+}
+
+.sous-titre {
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin: 64px 0 20px;
+}
+
+
+/* ---------- 8. À propos ---------- */
+.a-propos-grille {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.a-propos-texte {
+  flex: 1.3;
+  min-width: 0;
+  font-size: 18px;
+  color: var(--couleur-texte-doux);
+}
+.a-propos-texte p { margin: 0 0 18px; max-width: 60ch; }
+
+.fiche {
+  flex: 1;
+  min-width: 0;
+  border-radius: var(--rayon);
+  padding: 22px 24px;
+}
+.fiche-commande { margin: 0 0 14px; font-size: 13px; color: var(--couleur-texte-faible); }
+.fiche-liste { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.fiche-liste div {
+  display: flex;
+  gap: 16px;
+  font-family: var(--police-mono);
+  font-size: 13px;
+}
+.fiche-liste dt { flex: 0 0 96px; color: var(--couleur-texte-faible); }
+.fiche-liste dd { margin: 0; color: var(--couleur-texte); }
+
+.methode {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 14px;
+}
+.methode li {
+  flex: 1;
+  border-radius: 20px;
+  padding: 18px 20px;
+}
+.methode span { display: block; font-size: 12px; color: var(--couleur-texte-faible); margin-bottom: 10px; }
+.methode strong { font-weight: 500; font-size: 17px; }
+.methode p { margin: 6px 0 0; font-size: 14px; color: var(--couleur-texte-doux); }
+
+
+/* ---------- 9. Parcours ---------- */
+.frise {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.frise-element {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.frise-date {
+  flex: 0 0 150px;
+  padding-top: 22px;
+  font-size: 13px;
+  color: var(--couleur-texte-faible);
+}
+
+.frise-carte {
+  flex: 1;
+  min-width: 0;
+  border-radius: 22px;
+  padding: 20px 24px;
+}
+.frise-carte h3 { margin: 0 0 6px; font-weight: 500; font-size: 18px; letter-spacing: -0.01em; }
+.frise-carte p { margin: 0; font-size: 15px; color: var(--couleur-texte-doux); }
+
+
+/* ---------- 10. Compétences ---------- */
+.legende { font-size: 12px; color: var(--couleur-texte-faible); margin: -28px 0 28px; }
+
+.competences-grille {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.bloc {
+  flex: 1 1 calc(33.333% - 16px);
+  min-width: 260px;
+  border-radius: var(--rayon);
+  padding: 22px 24px;
+}
+.bloc h3 { margin: 0 0 14px; font-weight: 400; font-size: 14px; color: var(--couleur-texte-doux); }
+.bloc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.bloc li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+/* Jauge à 4 segments : le nombre de segments allumés = data-niveau */
+.niveau {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 3px;
+}
+.niveau::before {
+  content: "";
+  width: 52px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg,
+    var(--couleur-accent) 0 var(--rempli),
+    var(--couleur-trait) var(--rempli) 100%);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 11px, transparent 11px 14px);
+  mask: repeating-linear-gradient(90deg, #000 0 11px, transparent 11px 14px);
+}
+.niveau[data-niveau="1"] { --rempli: 25%; }
+.niveau[data-niveau="2"] { --rempli: 50%; }
+.niveau[data-niveau="3"] { --rempli: 75%; }
+.niveau[data-niveau="4"] { --rempli: 100%; }
+
+
+/* ---------- 11. Réalisations ---------- */
+.filtres {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 5px;
+  border-radius: 999px;
+  margin-bottom: 28px;
+}
+.filtre {
+  font-family: var(--police-mono);
+  font-size: 13px;
+  padding: 7px 15px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--couleur-texte-doux);
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.filtre:hover { color: var(--couleur-texte); }
+.filtre.actif { background: var(--couleur-accent); color: var(--couleur-sur-accent); }
+
+.projets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.projet {
+  flex: 1 1 calc(33.333% - 16px);
+  min-width: 280px;
+  border-radius: var(--rayon);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s;
+}
+.projet:hover { transform: translateY(-4px); }
+.projet[hidden] { display: none; }
+
+.projet-type { margin: 0 0 10px; font-size: 12px; color: var(--couleur-texte-faible); }
+.projet h3 { margin: 0 0 10px; font-weight: 500; font-size: 20px; line-height: 1.25; letter-spacing: -0.015em; }
+.projet p { margin: 0 0 12px; font-size: 15px; color: var(--couleur-texte-doux); }
+.projet-appris b { font-weight: 500; color: var(--couleur-texte); }
+.pile { margin: auto 0 0 !important; padding-top: 12px; border-top: 1px solid var(--couleur-trait); font-size: 12px !important; color: var(--couleur-texte-faible) !important; }
+
+
+/* ---------- 11 bis. Détails dépliables des projets ---------- */
+/* Un projet ouvert prend toute la largeur pour que le code soit lisible */
+.projet:has(.detail[open]) { flex-basis: 100%; }
+
+.detail { margin-top: 14px; }
+
+/* Reflet plus fort pendant l'animation d'ouverture (js/interactions.js, partie 5) */
+.projet.verre-actif {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 1px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 0 40px rgba(255, 255, 255, 0.06),
+    0 30px 80px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.3s;
+}
+
+.detail summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--couleur-trait);
+  font-size: 12px;
+  color: var(--couleur-texte-doux);
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.3s, color 0.3s;
+}
+.detail summary::-webkit-details-marker { display: none; }
+.detail summary::after { content: "▾"; transition: transform 0.3s; }
+.detail summary:hover { color: var(--couleur-texte); background: rgba(255, 255, 255, 0.06); }
+.detail[open] summary { background: var(--couleur-accent); color: var(--couleur-sur-accent); border-color: transparent; }
+.detail[open] summary::after { transform: rotate(180deg); }
+
+/* Deux colonnes qui se remplissent l'une après l'autre (une seule sur mobile) */
+.detail-contenu {
+  columns: 2 380px;
+  column-gap: 40px;
+  margin-top: 20px;
+  animation: fondu-flou 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.detail-bloc { break-inside: avoid; margin-bottom: 24px; min-width: 0; }
+.detail-bloc h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--couleur-texte-faible);
+}
+.detail-bloc p { font-size: 15px; }
+.detail-bloc p b { font-weight: 500; color: var(--couleur-texte); }
+.detail-bloc code {
+  font-family: var(--police-mono);
+  font-size: 0.9em;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Étapes numérotées */
+.etapes {
+  list-style: none;
+  counter-reset: etape;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.etapes li {
+  counter-increment: etape;
+  display: flex;
+  gap: 14px;
+  font-size: 15px;
+  color: var(--couleur-texte-doux);
+}
+.etapes li::before {
+  content: counter(etape, decimal-leading-zero);
+  flex: 0 0 auto;
+  font-family: var(--police-mono);
+  font-size: 12px;
+  padding-top: 3px;
+  color: var(--couleur-texte-faible);
+}
+.etapes strong { font-weight: 500; color: var(--couleur-texte); margin-right: 4px; }
+
+.liste { margin: 0 0 12px; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+.liste li { font-size: 15px; color: var(--couleur-texte-doux); }
+
+/* Bloc de code façon terminal en verre */
+.code {
+  position: relative;
+  margin: 14px 0 0;
+  padding: 38px 18px 16px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--couleur-trait);
+  overflow-x: auto;
+  font-family: var(--police-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: #e6e6ea;
+}
+.detail-bloc .code code { padding: 0; background: none; font-size: inherit; }
+.code-lang {
+  position: absolute;
+  top: 10px;
+  left: 18px;
+  font-size: 11px;
+  color: var(--couleur-texte-faible);
+}
+
+/* Tableau de résultats */
+.tableau-defile { overflow-x: auto; margin-bottom: 12px; }
+.tableau { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tableau th {
+  text-align: left;
+  font-family: var(--police-mono);
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--couleur-texte-faible);
+  padding: 0 12px 8px 0;
+  border-bottom: 1px solid var(--couleur-trait);
+}
+.tableau td {
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--couleur-texte-doux);
+}
+.tableau td:nth-child(2), .tableau td:nth-child(3) { font-family: var(--police-mono); font-size: 12px; white-space: nowrap; }
+
+
+/* ---------- 12. Contact et pied de page ---------- */
+.contact {
+  border-radius: 34px;
+  padding: 56px;
+}
+.contact .titre-section { margin-bottom: 18px; }
+.contact-texte { margin: 0; font-size: 18px; color: var(--couleur-texte-doux); max-width: 50ch; }
+
+.pied { padding: 0 0 40px; }
+.pied-contenu {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--couleur-texte-faible);
+}
+
+
+/* ---------- 13. Animations ---------- */
+@keyframes pulsation {
+  50% { opacity: 0.35; box-shadow: 0 0 2px var(--couleur-accent); }
+}
+@keyframes fondu-flou {
+  from { opacity: 0; filter: blur(12px); transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; filter: blur(0); transform: none; }
+}
+@keyframes fondu {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Apparition au défilement : seulement si le JS tourne (classe "js" sur <html>) */
+.js .apparition {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.js .apparition.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .voyant { animation: none; }
+  .js .apparition { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* ---------- 14. Responsive ---------- */
+@media (max-width: 900px) {
+  .accueil-bas { flex-direction: column; align-items: stretch; }
+  .vedette { flex: none; }
+  .a-propos-grille { flex-direction: column; }
+  .methode { flex-wrap: wrap; }
+  .methode li { flex: 1 1 calc(50% - 14px); }
+  .frise-element { flex-direction: column; gap: 8px; }
+  .frise-date { flex: none; padding-top: 0; }
+  .contact { padding: 36px 26px; }
+}
+
+@media (max-width: 560px) {
+  .section { padding: 80px 0; }
+  .methode li { flex-basis: 100%; }
+  .bloc, .projet { min-width: 100%; }
+  .barre-etat { border-radius: 20px; }
+  .role, .a-propos-texte { font-size: 16px; }
+}

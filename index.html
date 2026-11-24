@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alessio Schirru · Portfolio</title>
+  <meta name="description" content="Portfolio d'Alessio Schirru, apprenti technicien informatique en BTS SIO SISR : Linux, réseaux, Bash et cybersécurité.">
+
+  <!-- Polices : Geist (texte), Geist Mono (détails système), Instrument Serif (italique du nom) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fond : ciel de nuit + nuage, dessiné par js/ciel.js. Sans JS, le fond reste noir. -->
+  <canvas id="ciel" aria-hidden="true"></canvas>
+
+  <!-- ============ MENU ============ -->
+  <header class="menu">
+    <nav class="menu-pilule verre" aria-label="Menu principal">
+      <a href="#accueil" class="actif">~/accueil</a>
+      <a href="#a-propos">~/à-propos</a>
+      <a href="#parcours">~/parcours</a>
+      <a href="#competences">~/compétences</a>
+      <a href="#realisations">~/réalisations</a>
+      <a href="#contact">~/contact</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ ACCUEIL ============ -->
+    <section id="accueil" class="accueil">
+      <div class="conteneur accueil-contenu">
+
+        <div class="barre-etat verre">
+          <span><i class="voyant"></i>en alternance · Eltis</span>
+          <span><b>uptime</b> BTS 2026–2028</span>
+          <span><b>os</b> ubuntu 24.04</span>
+          <span><b>shell</b> bash</span>
+        </div>
+
+        <div class="accueil-bas">
+          <div class="accueil-texte">
+            <p class="chemin">alessio@portfolio:~$ whoami</p>
+            <h1 class="nom">Alessio<br><em>Schirru</em></h1>
+            <p class="role">Apprenti technicien informatique. BTS SIO SISR : Linux, réseaux, Bash et cybersécurité.</p>
+            <div class="boutons">
+              <a href="#realisations" class="bouton bouton-plein">Voir mes réalisations</a>
+              <a href="https://github.com/alessio-schirru" class="bouton verre" target="_blank" rel="noopener">GitHub ↗</a>
+            </div>
+          </div>
+
+          <!-- Carte "en vedette" : 3 projets qui défilent (js/interactions.js).
+               Sans JS, seul le premier est affiché. -->
+          <aside class="vedette verre" aria-label="Réalisations en vedette">
+            <div class="vedette-haut">
+              <span class="mono vedette-chemin">~/réalisations/<span id="vedette-dossier">audit-ideal</span></span>
+              <span class="mono vedette-compteur"><span id="vedette-num">1</span>/3</span>
+            </div>
+            <div class="vedette-barre"><span id="vedette-progression"></span></div>
+
+            <div class="vedette-diapo active" data-dossier="audit-ideal">
+              <p class="vedette-type">Cyber · audit de sécurité</p>
+              <h2 class="vedette-titre">J'ai attaqué mon propre site WordPress</h2>
+              <p class="vedette-texte">Un audit complet de mon site IDEAL, vu de l'extérieur puis de l'intérieur : 9 failles relevées, classées et accompagnées de leur correctif.</p>
+              <p class="mono vedette-pile">wpscan · dirb · curl · wp-cli · bash</p>
+            </div>
+            <div class="vedette-diapo" data-dossier="deploiement">
+              <p class="vedette-type">Entreprise · en test</p>
+              <h2 class="vedette-titre">Installer les logiciels d'un nouveau poste selon le métier</h2>
+              <p class="vedette-texte">Mon propre outil en Bash d'abord, puis le passage à Ansible : un outil standard vaut souvent mieux qu'un outil fait maison.</p>
+              <p class="mono vedette-pile">bash · ansible · yaml · docker</p>
+            </div>
+            <div class="vedette-diapo" data-dossier="cheat">
+              <p class="vedette-type">Perso · mon propre outil</p>
+              <h2 class="vedette-titre">cheat, mes aide-mémoires dans le terminal</h2>
+              <p class="vedette-texte">Créer, chercher et éditer des fiches Markdown en une commande. Objectif : un paquet installable avec apt.</p>
+              <p class="mono vedette-pile">bash · markdown · .deb</p>
+            </div>
+
+            <div class="vedette-bas">
+              <div class="vedette-points" role="tablist" aria-label="Choisir un projet">
+                <button type="button" class="point actif" aria-label="Projet 1"></button>
+                <button type="button" class="point" aria-label="Projet 2"></button>
+                <button type="button" class="point" aria-label="Projet 3"></button>
+              </div>
+              <a href="#realisations" class="vedette-lien">tout voir →</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ À PROPOS ============ -->
+    <section id="a-propos" class="section">
+      <div class="conteneur">
+        <p class="chemin apparition">alessio@portfolio:~$ cat a-propos.md</p>
+        <h2 class="titre-section apparition">Autodidacte, <em>au clavier</em>.</h2>
+
+        <div class="a-propos-grille">
+          <div class="a-propos-texte apparition">
+            <p>J'ai 20 ans et je vis en Haute-Savoie, près d'Annecy. Je suis en BTS SIO option SISR en alternance chez Eltis, une PME de l'électricité et de l'énergie, où je suis le premier informaticien interne.</p>
+            <p>J'ai appris Linux, SSH, nmap et le Bash par moi-même, avant et à côté des cours. Ce qui m'attire, c'est de comprendre comment on attaque un système pour mieux le défendre, toujours de façon légale, sur mes propres machines ou des plateformes prévues pour ça.</p>
+            <p>Après le BTS, je veux travailler, idéalement en Suisse.</p>
+            <p>À côté de l'informatique, je suis double champion de France de kickboxing (2022 et 2023). Le sport de haut niveau m'a appris la discipline et à rester calme sous pression.</p>
+          </div>
+
+          <!-- Fiche façon "neofetch" -->
+          <div class="fiche verre apparition">
+            <p class="mono fiche-commande">$ neofetch</p>
+            <dl class="fiche-liste">
+              <div><dt>utilisateur</dt><dd>alessio@annecy</dd></div>
+              <div><dt>formation</dt><dd>BTS SIO SISR</dd></div>
+              <div><dt>alternance</dt><dd>Eltis</dd></div>
+              <div><dt>os</dt><dd>Ubuntu 24.04 LTS</dd></div>
+              <div><dt>éditeurs</dt><dd>nano, VS Code</dd></div>
+              <div><dt>notes</dt><dd>Obsidian</dd></div>
+              <div><dt>objectif</dt><dd>travailler en Suisse</dd></div>
+              <div><dt>langues</dt><dd>français, anglais B2</dd></div>
+              <div><dt>sport</dt><dd>kickboxing · 2× champion de France</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <h3 class="sous-titre apparition">Ma méthode pour apprendre</h3>
+        <ol class="methode">
+          <li class="verre apparition"><span class="mono">01</span><strong>Cours court</strong><p>Je vais à l'essentiel pour comprendre la notion.</p></li>
+          <li class="verre apparition"><span class="mono">02</span><strong>Exercices</strong><p>Je tape tout moi-même, sans copier-coller.</p></li>
+          <li class="verre apparition"><span class="mono">03</span><strong>Exercice blanc</strong><p>Je refais sans aide jusqu'à ce que ça devienne un réflexe.</p></li>
+          <li class="verre apparition"><span class="mono">04</span><strong>Runbook</strong><p>Je documente tout dans Obsidian pour pouvoir le refaire.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PARCOURS ============ -->
+    <section id="parcours" class="section">
+      <div class="conteneur">
+        <p class="chemin apparition">alessio@portfolio:~$ history</p>
+        <h2 class="titre-section apparition">Mon <em>parcours</em>.</h2>
+
+        <ol class="frise">
+          <li class="frise-element apparition">
+            <span class="frise-date mono">depuis nov. 2026</span>
+            <div class="frise-carte verre">
+              <h3>Apprenti technicien informatique · Eltis</h3>
+              <p>Premier poste informatique interne d'une PME de 30 à 50 salariés dont l'informatique est confiée à un prestataire. J'analyse les besoins des services et je propose des solutions : déploiement automatique des postes, outil de demandes d'assistance, agenda partagé.</p>
+            </div>
+          </li>
+          <li class="frise-element apparition">
+            <span class="frise-date mono">depuis sept. 2026</span>
+            <div class="frise-carte verre">
+              <h3>BTS SIO option SISR · Campus Saint-Michel IT, Annecy</h3>
+              <p>Solutions d'infrastructure, systèmes et réseaux, en alternance. Veille technologique sur le cloud : SaaS, souveraineté et API.</p>
+            </div>
+          </li>
+          <li class="frise-element apparition">
+            <span class="frise-date mono">2025 – 2026</span>
+            <div class="frise-carte verre">
+              <h3>BUT Informatique, 1re année · IUT d'Annecy</h3>
+              <p>Bases en développement et en gestion de projet. J'ai ensuite choisi un BTS SISR, plus pratique et tourné vers l'infrastructure.</p>
+            </div>
+          </li>
+          <li class="frise-element apparition">
+            <span class="frise-date mono">avant</span>
+            <div class="frise-carte verre">
+              <h3>Jobs étudiants</h3>
+              <p>Carrefour (employé polyvalent), McDonald's (équipier), CSD (agent de quais). Travail en équipe, sous pression et en horaires décalés.</p>
+            </div>
+          </li>
+          <li class="frise-element apparition">
+            <span class="frise-date mono">avant 2025</span>
+            <div class="frise-carte verre">
+              <h3>BTS SIO · Grenoble</h3>
+              <p>Commencé puis arrêté au bout d'un mois : la formation ne me correspondait pas. J'ai travaillé directement après.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ COMPÉTENCES ============ -->
+    <section id="competences" class="section">
+      <div class="conteneur">
+        <p class="chemin apparition">alessio@portfolio:~$ ls competences/</p>
+        <h2 class="titre-section apparition">Ce que je <em>sais faire</em>.</h2>
+        <p class="legende mono apparition">niveaux : 1 notions · 2 débutant · 3 intermédiaire · 4 avancé</p>
+
+        <div class="competences-grille">
+          <!-- Pour changer un niveau : modifier data-niveau (1 à 4) -->
+          <div class="bloc verre apparition">
+            <h3 class="mono">systèmes/</h3>
+            <ul>
+              <li><span>Linux (Ubuntu)</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>Windows 10/11</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>Dual boot</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>WSL2, VirtualBox</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Docker</span><span class="niveau" data-niveau="1"></span></li>
+            </ul>
+          </div>
+          <div class="bloc verre apparition">
+            <h3 class="mono">réseau/</h3>
+            <ul>
+              <li><span>SSH (clés ed25519)</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>Commandes réseau</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>nmap</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Tailscale</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>IP, VLAN, routage</span><span class="niveau" data-niveau="1"></span></li>
+            </ul>
+          </div>
+          <div class="bloc verre apparition">
+            <h3 class="mono">scripting/</h3>
+            <ul>
+              <li><span>Bash</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>HTTP, API REST, curl</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>JSON, jq</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Ansible, YAML</span><span class="niveau" data-niveau="1"></span></li>
+              <li><span>PowerShell</span><span class="niveau" data-niveau="1"></span></li>
+            </ul>
+          </div>
+          <div class="bloc verre apparition">
+            <h3 class="mono">web/</h3>
+            <ul>
+              <li><span>HTML5, CSS3, Flexbox</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Pile LAMP</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>WordPress</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>SQL, MariaDB</span><span class="niveau" data-niveau="1"></span></li>
+            </ul>
+          </div>
+          <div class="bloc verre apparition">
+            <h3 class="mono">cyber/</h3>
+            <ul>
+              <li><span>Bandit (OverTheWire)</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>Audit WordPress</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Injections SQL et de commande</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>TryHackMe</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Sécurité défensive</span><span class="niveau" data-niveau="2"></span></li>
+            </ul>
+          </div>
+          <div class="bloc verre apparition">
+            <h3 class="mono">outils/</h3>
+            <ul>
+              <li><span>Obsidian</span><span class="niveau" data-niveau="4"></span></li>
+              <li><span>Git, GitHub, gh</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>VS Code, nano</span><span class="niveau" data-niveau="3"></span></li>
+              <li><span>GLPI</span><span class="niveau" data-niveau="2"></span></li>
+              <li><span>Microsoft 365</span><span class="niveau" data-niveau="2"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RÉALISATIONS ============ -->
+    <section id="realisations" class="section">
+      <div class="conteneur">
+        <p class="chemin apparition">alessio@portfolio:~$ ls realisations/</p>
+        <h2 class="titre-section apparition">Mes <em>réalisations</em>.</h2>
+
+        <!-- Filtres (js/interactions.js). Sans JS, tous les projets restent visibles. -->
+        <div class="filtres verre apparition" role="group" aria-label="Filtrer les réalisations">
+          <button type="button" class="filtre actif" data-filtre="tout">tout</button>
+          <button type="button" class="filtre" data-filtre="entreprise">entreprise</button>
+          <button type="button" class="filtre" data-filtre="perso">perso</button>
+          <button type="button" class="filtre" data-filtre="ecole">école</button>
+          <button type="button" class="filtre" data-filtre="cyber">cyber</button>
+        </div>
+
+        <div class="projets">
+          <!-- data-categorie : entreprise, perso, ecole, cyber (plusieurs possibles, séparés par un espace) -->
+
+          <article class="projet verre apparition" data-categorie="entreprise">
+            <p class="projet-type mono">entreprise</p>
+            <h3>Déploiement des postes par métier</h3>
+            <p>Le but : qu'un nouvel employé trouve son poste prêt, avec les logiciels de son métier déjà installés. J'ai d'abord développé mon propre outil en Bash, PostInit : on choisit le métier et le poste, il affiche un récapitulatif, demande de confirmer en tapant le nom du poste, puis installe et journalise chaque étape. Les données de l'entreprise sont séparées du code. Il fonctionne en environnement de test. Puis j'ai commencé à passer à Ansible, avec l'interface web Semaphore.</p>
+            <p class="projet-appris"><b>Appris :</b> la démarche, du besoin à la solution, le Bash, le YAML et Ansible. Et surtout que tout faire soi-même n'est pas toujours la bonne idée : un outil standard est souvent plus fiable et plus simple à maintenir.</p>
+            <p class="pile mono">bash · ansible · yaml · docker · semaphore</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># le besoin</h4><p>Quand un employé arrive, son poste doit être prêt avec les logiciels de son métier, sans que lui ni son tuteur aient à s'en occuper.</p></div><div class="detail-bloc"><h4 class="mono"># version 1 : PostInit, mon outil en Bash</h4><ol class="etapes"><li><span><strong>Vérifier les prérequis.</strong> Mode connu (simulation ou réel), jq installé, inventaire JSON valide, dossier des profils présent. Sinon, l'outil s'arrête avec un message clair.</span></li><li><span><strong>Choisir le profil métier.</strong> Un fichier texte par métier, qui liste ses logiciels.</span></li><li><span><strong>Choisir le poste cible</strong> dans l'inventaire.</span></li><li><span><strong>Relire le récapitulatif et confirmer</strong> en tapant le nom exact du poste, pour éviter d'installer sur la mauvaise machine.</span></li><li><span><strong>Installer</strong> et afficher le résultat de chaque logiciel.</span></li><li><span><strong>Tout journaliser</strong> dans un fichier de logs.</span></li></ol><p>Le code est générique : tout ce qui est propre à une entreprise est dans les données, jamais dans le code. On peut donc le réutiliser ailleurs.</p></div><div class="detail-bloc"><h4 class="mono"># version 2 : passage à Ansible</h4><p>Mon prof référent m'a conseillé de ne pas réinventer la roue. J'ai repris la même logique avec Ansible : un inventaire où les postes sont rangés par métier, un fichier par métier avec ses logiciels (installés par winget), et Semaphore comme interface web. J'ai gardé les mêmes sécurités que dans PostInit.</p><pre class="code"><span class="code-lang">yaml · deploiement.yml (extrait)</span><code>- name: Refuser un lancement sans --limit
+  ansible.builtin.assert:
+    that: ansible_limit is defined
+    fail_msg: &quot;Lancement refusé : précise le poste avec --limit NOM-DU-POSTE&quot;
+
+- name: Refuser un lancement sur plusieurs postes
+  ansible.builtin.assert:
+    that: ansible_play_hosts | length == 1
+    fail_msg: &quot;Lancement refusé : un seul poste à la fois&quot;
+
+- name: Vérifier la confirmation
+  ansible.builtin.assert:
+    that: confirmation_poste == inventory_hostname
+    fail_msg: &quot;Confirmation refusée : le nom ne correspond pas&quot;</code></pre></div><div class="detail-bloc"><h4 class="mono"># où j'en suis</h4><p>PostInit fonctionne en environnement de test, avec des données fictives. La version Ansible est en cours de prise en main. Rien n'est encore utilisé en production.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="entreprise">
+            <p class="projet-type mono">entreprise · bientôt en place</p>
+            <h3>Outil de demandes d'assistance</h3>
+            <p>De ma propre initiative, j'ai étudié comment les demandes d'aide informatique étaient faites, puis j'ai conçu une solution adaptée à l'entreprise : un formulaire Forms, une liste de tickets dans Lists et des mails automatiques avec Power Automate. Tout reste dans le Microsoft 365 existant, sans outil payant ni tiers.</p>
+            <p class="projet-appris"><b>Appris :</b> partir du besoin réel, faire avec les outils autorisés, et défendre une proposition auprès de l'équipe.</p>
+            <p class="pile mono">forms · lists · power automate</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># démarche</h4><ol class="etapes"><li><span><strong>Observer.</strong> Comprendre comment les demandes d'aide informatique arrivaient et se perdaient.</span></li><li><span><strong>Lister les contraintes.</strong> Pas de droits administrateur, rien en dehors du Microsoft 365 de l'entreprise, ni outil tiers ni connecteur payant.</span></li><li><span><strong>Concevoir.</strong> Un formulaire Forms pour les utilisateurs, une liste Lists pour suivre chaque ticket et son statut, et des mails automatiques avec Power Automate.</span></li><li><span><strong>Prévoir la suite.</strong> Un second propriétaire pour la continuité, et une documentation pour le prestataire.</span></li><li><span><strong>En discuter avec l'équipe</strong> avant la mise en place.</span></li></ol></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="entreprise">
+            <p class="projet-type mono">entreprise · proposition</p>
+            <h3>Agenda partagé Microsoft 365</h3>
+            <p>Toujours de ma propre initiative : repenser l'agenda commun du bureau avec un groupe Microsoft 365, où chacun a son propre accès et des droits de lecture ou de modification selon le calendrier.</p>
+            <p class="projet-appris"><b>Appris :</b> préparer la migration d'un service, gérer des droits, et préférer des comptes personnels à un compte partagé.</p>
+            <p class="pile mono">microsoft 365 · gestion des droits</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># démarche</h4><ol class="etapes"><li><span><strong>Analyser l'usage actuel</strong> de l'agenda commun du bureau.</span></li><li><span><strong>Proposer un groupe Microsoft 365 de test</strong> dédié à l'agenda.</span></li><li><span><strong>Prévoir l'import</strong> des événements existants.</span></li><li><span><strong>Définir les droits</strong> de lecture et de modification pour chaque calendrier.</span></li></ol></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso">
+            <p class="projet-type mono">perso</p>
+            <h3>Labo GLPI « Elec-Lab »</h3>
+            <p>Un GLPI complet dans une VM VirtualBox, sur une entreprise fictive : gestion de parc et de tickets, plus mes scripts Bash de sauvegarde, restauration et vérification.</p>
+            <p class="projet-appris"><b>Appris :</b> l'ITSM, l'inventaire, et comparer des solutions selon le contexte.</p>
+            <p class="pile mono">virtualbox · lamp · glpi · bash</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># contenu</h4><ol class="etapes"><li><span><strong>Une VM VirtualBox</strong> avec un serveur Linux et la pile LAMP.</span></li><li><span><strong>GLPI installé</strong> avec une entité fictive, « Elec-Lab », et uniquement des données inventées.</span></li><li><span><strong>Gestion de parc et de tickets</strong> pour m'entraîner comme en entreprise.</span></li><li><span><strong>Mes scripts Bash</strong> de sauvegarde, de restauration et de vérification.</span></li></ol><p>Prochaine étape : un comparatif argumenté entre GLPI et une solution Microsoft 365, pour une PME de 30 à 50 salariés.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso">
+            <p class="projet-type mono">perso</p>
+            <h3>cheat, aide-mémoires en ligne de commande</h3>
+            <p>Mon propre outil en Bash pour créer, afficher, chercher et éditer des fiches Markdown. Feuille de route : options, page man, complétion, puis un paquet .deb installable avec apt.</p>
+            <p class="projet-appris"><b>Appris :</b> les fonctions Bash, le parsing d'options, les variables d'environnement et les pièges des alias.</p>
+            <p class="pile mono">bash · markdown · packaging debian</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># ce qui marche déjà</h4><ul class="liste"><li><code>cheat</code> sans argument liste toutes les fiches.</li><li><code>cheat -n nom</code> crée une fiche et l'ouvre dans l'éditeur.</li><li>Une fiche enregistrée vide est supprimée automatiquement.</li><li>Le dossier et l'éditeur se règlent avec des variables d'environnement.</li></ul><pre class="code"><span class="code-lang">bash · cheat (extrait)</span><code>cheat() {
+    local dir=${CHEAT_DIR:-$HOME/cheats}    # dossier des fiches
+    local editor=${VISUAL:-${EDITOR:-nano}} # éditeur, nano par défaut
+    command mkdir -p &quot;$dir&quot;                 # command : ignore les alias
+
+    if [[ -z &quot;$1&quot; ]]; then                  # aucun argument : liste les fiches
+        for f in &quot;$dir&quot;/*.md; do
+            [[ -f &quot;$f&quot; ]] || continue
+            command basename &quot;$f&quot; .md
+        done
+    fi
+}</code></pre></div><div class="detail-bloc"><h4 class="mono"># difficulté rencontrée</h4><p>Mon thème de terminal (Oh My Bash) remplaçait certaines commandes par des alias au moment où la fonction était définie, ce qui changeait son comportement. Solution : appeler les vraies commandes avec <code>command</code>.</p></div><div class="detail-bloc"><h4 class="mono"># feuille de route</h4><ol class="etapes"><li><span><strong>Options</strong> pour éditer, supprimer, chercher et afficher l'aide, avec des couleurs.</span></li><li><span><strong>Script autonome</strong> avec une page man et l'autocomplétion bash et zsh.</span></li><li><span><strong>Paquet .deb</strong> installable avec apt.</span></li></ol></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso">
+            <p class="projet-type mono">perso</p>
+            <h3>Administrer Windows depuis Ubuntu en SSH</h3>
+            <p>OpenSSH Server sur Windows, connexion par clé ed25519, puis des scripts Bash et PowerShell pour auditer et nettoyer le disque à distance. Résultat : environ 190 Go retrouvés.</p>
+            <p class="projet-appris"><b>Appris :</b> la cryptographie asymétrique en pratique et l'administration multi-OS.</p>
+            <p class="pile mono">ssh · bash · powershell</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># démarche</h4><ol class="etapes"><li><span><strong>Côté Windows :</strong> installer et démarrer OpenSSH Server, vérifier le pare-feu et le profil réseau.</span></li><li><span><strong>Côté Ubuntu :</strong> générer une paire de clés ed25519 et déposer la clé publique sur Windows.</span></li><li><span><strong>Tester</strong> une connexion sans mot de passe, puis des commandes à distance en une ligne.</span></li><li><span><strong>Automatiser</strong> avec des scripts Bash qui lancent des scripts PowerShell : audit du disque avec seuil d'alerte, nettoyage sûr des fichiers temporaires, analyse de la taille des dossiers.</span></li><li><span><strong>Documenter</strong> le tout dans une procédure réutilisable sur d'autres machines.</span></li></ol></div><div class="detail-bloc"><h4 class="mono"># pièges rencontrés</h4><ul class="liste"><li>Avec un compte Microsoft, la connexion par mot de passe échoue souvent. La clé SSH règle le problème, et c'est de toute façon la bonne pratique.</li><li>Une commande entre guillemets est interprétée par le shell de Windows, pas par Bash. Avec des guillemets simples, Bash n'y touche pas.</li><li>Ne jamais lancer à distance une commande qui coupe le réseau ou SSH de la machine : on perd l'accès.</li></ul><pre class="code"><span class="code-lang">bash</span><code>ssh utilisateur@pc-windows &#x27;powershell -File C:\Scripts\audit_disque.ps1&#x27;</code></pre></div><div class="detail-bloc"><h4 class="mono"># résultat</h4><p>Environ 190 Go de dossiers de jeux repérés et libérés sur mon PC.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso">
+            <p class="projet-type mono">perso</p>
+            <h3>Labo API et cloud</h3>
+            <p>Six leçons pour être prêt avant l'alternance : HTTP et curl, JSON et jq, authentification, erreurs et nouvelles tentatives, puis un script de synchronisation.</p>
+            <p class="projet-appris"><b>Appris :</b> parler à une API depuis le terminal et gérer ses erreurs.</p>
+            <p class="pile mono">curl · jq · bash · cron</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># les leçons</h4><ol class="etapes"><li><span><strong>HTTP et curl :</strong> méthodes, codes de réponse, en-têtes.</span></li><li><span><strong>JSON et jq :</strong> lire, filtrer et transformer des données.</span></li><li><span><strong>Authentification :</strong> jeton, identifiants, et secrets rangés dans un fichier .env plutôt que dans le code.</span></li><li><span><strong>Erreurs et nouvelles tentatives</strong> quand une API ne répond pas.</span></li><li><span><strong>Script de synchronisation</strong> entre deux sources de données.</span></li><li><span><strong>Logs, cron et sécurité réseau</strong> (en cours).</span></li></ol></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso ecole">
+            <p class="projet-type mono">perso · école</p>
+            <h3>Parcours de scripting Bash</h3>
+            <p>Une série de scripts de plus en plus durs, jusqu'à audit_users.sh : analyser un fichier d'utilisateurs, filtrer par shell et vérifier les dossiers personnels. Exercice blanc fait sans aide.</p>
+            <p class="projet-appris"><b>Appris :</b> boucles, tests, awk et codes de retour, jusqu'au réflexe.</p>
+            <p class="pile mono">bash · awk</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># progression</h4><ol class="etapes"><li><span><strong>infos.sh :</strong> informations système, dates en français, argument par défaut.</span></li><li><span><strong>infos2.sh :</strong> alerte quand le disque se remplit.</span></li><li><span><strong>contenu.sh :</strong> lister les fichiers et dossiers, repérer les dossiers vides.</span></li><li><span><strong>ping_liste.sh :</strong> tester une liste de machines lue ligne par ligne.</span></li><li><span><strong>audit_users.sh :</strong> l'exercice blanc, fait sans aide.</span></li></ol></div><div class="detail-bloc"><h4 class="mono"># l'exercice blanc</h4><p>Lire un fichier au format <code>/etc/passwd</code>, garder les comptes qui ont un shell Bash, vérifier que leur dossier personnel existe, puis afficher le total.</p><pre class="code"><span class="code-lang">bash · audit_users.sh (extrait)</span><code>while IFS=: read -r nom mdp uid gid commentaire repo shell; do
+    if [ &quot;$shell&quot; = &quot;/bin/bash&quot; ]; then
+        nb_shell=$((nb_shell + 1))
+        if [ -d &quot;$repo&quot; ]; then
+            echo &quot;[OK]     $nom  ($repo)&quot;
+        else
+            echo &quot;[ABSENT] $nom  ($repo)&quot;
+            nb_absent=$((nb_absent + 1))
+        fi
+    fi
+done &lt; &quot;$file&quot;
+
+echo &quot;$nb_shell comptes avec shell, dont $nb_absent sans dossier perso&quot;</code></pre></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="cyber ecole">
+            <p class="projet-type mono">cyber · école</p>
+            <h3>Audit de sécurité de mon site WordPress</h3>
+            <p>Après avoir appris les bases de l'attaque, j'ai audité mon propre site IDEAL, en local. D'abord en attaquant externe (wpscan, dirb, curl et mon propre scanner en Bash), puis en administrateur (WP-CLI). Résultat : 9 failles classées par criticité, chacune avec son correctif. Les plugins périmés sont déjà mis à jour.</p>
+            <p class="projet-appris"><b>Appris :</b> la vue externe ne montre qu'une partie des problèmes, cacher n'est pas sécuriser, et il faut plusieurs barrières plutôt qu'une seule.</p>
+            <p class="pile mono">wpscan · dirb · curl · wp-cli · bash</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># démarche</h4><ol class="etapes"><li><span><strong>Poser le cadre.</strong> Uniquement mon installation locale, accessible depuis ma machine. Aucune cible tierce.</span></li><li><span><strong>Regarder de l'extérieur (black box).</strong> Comme un visiteur inconnu : versions affichées, extensions visibles, dossiers accessibles, avec wpscan, dirb, curl et mon propre scanner en Bash.</span></li><li><span><strong>Regarder de l'intérieur (white box).</strong> En administrateur, avec WP-CLI, pour avoir la liste exacte des extensions, des comptes et des réglages.</span></li><li><span><strong>Comparer les deux vues.</strong> L'outil externe n'a vu que 3 extensions sur 9 et s'est trompé sur une version. Un vrai audit combine les deux.</span></li><li><span><strong>Classer et corriger.</strong> Chaque faille reçoit une criticité, une preuve et un correctif. Je commence par les plus graves.</span></li></ol></div><div class="detail-bloc"><h4 class="mono"># résultats</h4><div class="tableau-defile"><table class="tableau">
+    <thead><tr><th>Faille</th><th>Criticité</th><th>État</th></tr></thead>
+    <tbody>
+      <tr><td>5 extensions pas à jour</td><td>élevée</td><td>corrigé</td></tr>
+      <tr><td>Aucune limite de tentatives de connexion</td><td>élevée</td><td>à faire</td></tr>
+      <tr><td>Liste des comptes visible publiquement</td><td>moyenne</td><td>à faire</td></tr>
+      <tr><td>Compte administrateur au nom par défaut</td><td>moyenne</td><td>à faire</td></tr>
+      <tr><td>XML-RPC activé</td><td>moyenne</td><td>à faire</td></tr>
+      <tr><td>Contenu d'un dossier listable</td><td>moyenne</td><td>à faire</td></tr>
+      <tr><td>Extension d'export complet de la base active</td><td>moyenne</td><td>à faire</td></tr>
+      <tr><td>Versions du serveur et du CMS affichées</td><td>faible</td><td>à faire</td></tr>
+      <tr><td>Extensions inactives laissées installées</td><td>faible</td><td>à faire</td></tr>
+    </tbody></table></div>
+    <p>Ce qui était déjà bien configuré : WordPress et le thème à jour, le fichier de configuration qui ne fuit pas, un mot de passe administrateur robuste, et des fichiers qui appartiennent à un compte de service séparé du mien (moindre privilège).</p></div><div class="detail-bloc"><h4 class="mono"># difficulté rencontrée</h4><p>Mon scanner maison considérait qu'une page n'existait pas quand le serveur répondait 404. Mais WordPress ne répond jamais 404 : il redirige tout (code 301). Résultat, mon script affichait toutes les pages comme « trouvées ».</p>
+    <p><b>Leçon :</b> un outil doit d'abord mesurer comment le site répond normalement, au lieu de supposer un comportement.</p><pre class="code"><span class="code-lang">bash · mini-drib.sh</span><code>#!/bin/bash
+url=$1
+
+while read mot; do
+    code=$(curl -s -o /dev/null -w &quot;%{http_code}&quot; $url/$mot)
+    if [ &quot;$code&quot; != &quot;404&quot; ]; then      # supposition fausse face à WordPress
+        echo &quot;$mot $code&quot;
+    fi
+done &lt;liste.txt</code></pre></div><div class="detail-bloc"><h4 class="mono"># ce que j'en retiens</h4><ul class="liste"><li>Cacher une information ne la protège pas.</li><li>Une seule barrière ne suffit jamais : c'est la défense en profondeur.</li><li>Un accès administrateur WordPress revient à pouvoir exécuter du code sur le serveur, d'où l'importance de bien protéger la connexion.</li></ul></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="cyber perso">
+            <p class="projet-type mono">cyber</p>
+            <h3>Labo de cybersécurité offensive</h3>
+            <p>Bandit d'OverTheWire presque jusqu'au niveau 30, entièrement en SSH. Sur DVWA, en local : injection SQL et injection de commande, du niveau le plus facile au plus protégé, en lisant le code source pour comprendre chaque correctif. Parcours Cyber Security 101 sur TryHackMe.</p>
+            <p class="projet-appris"><b>Appris :</b> penser comme un attaquant, et garder les labos vulnérables accessibles en local seulement.</p>
+            <p class="pile mono">linux · ssh · docker · sql</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># Bandit (OverTheWire)</h4><p>Un jeu où chaque niveau est une machine Linux à explorer en SSH pour trouver l'accès au niveau suivant. Pour chaque niveau, je note le raisonnement et le mécanisme Linux en jeu (permissions, programmes à droits élevés, réseau, tâches planifiées), jamais les mots de passe, comme le demandent les règles du site.</p></div><div class="detail-bloc"><h4 class="mono"># DVWA, injection de commande</h4><ol class="etapes"><li><span><strong>Comprendre la faille :</strong> la page passe ce que tape l'utilisateur directement à une commande système, sans le vérifier.</span></li><li><span><strong>Niveaux intermédiaires :</strong> le code retire certains caractères dangereux (liste noire). J'ai constaté qu'une liste noire oublie toujours un cas.</span></li><li><span><strong>Niveau le plus protégé :</strong> le code n'accepte que ce qui est attendu, ici une adresse IP en 4 nombres (liste blanche). C'est la bonne approche.</span></li></ol><p><b>Leçon :</b> ne jamais faire confiance à une saisie utilisateur, et préférer autoriser l'attendu plutôt qu'interdire le dangereux.</p></div><div class="detail-bloc"><h4 class="mono"># cadre</h4><p>Tout se passe sur des plateformes prévues pour ça ou dans des conteneurs accessibles uniquement depuis ma machine.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="cyber perso">
+            <p class="projet-type mono">cyber</p>
+            <h3>Cartographie de mon réseau avec nmap</h3>
+            <p>Découverte des hôtes, scan des ports et détection des versions sur mon propre réseau domestique, documenté dans un runbook.</p>
+            <p class="projet-appris"><b>Appris :</b> la notion de surface d'attaque et la lecture des résultats.</p>
+            <p class="pile mono">nmap · réseau</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># démarche</h4><ol class="etapes"><li><span><strong>Découvrir</strong> les machines actives du réseau.</span></li><li><span><strong>Scanner les ports</strong> d'une machine précise : ouvert, fermé ou filtré.</span></li><li><span><strong>Détecter les versions</strong> des services qui tournent.</span></li><li><span><strong>Confirmer depuis la machine elle-même</strong> quand le résultat est ambigu.</span></li></ol><p><b>Piège rencontré :</b> nmap annonçait une machine éteinte alors qu'elle répondait. Elle bloquait seulement les sondes de découverte. L'option <code>-Pn</code> saute cette étape.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="ecole">
+            <p class="projet-type mono">école</p>
+            <h3>Site WordPress « IDEAL »</h3>
+            <p>Le site d'une agence immobilière fictive, monté sous Ubuntu avec LAMP au lieu de WAMP. Rôle personnalisé, documentation, vidéo tutoriel, puis mise à jour de sécurité de PHP après une faille critique.</p>
+            <p class="projet-appris"><b>Appris :</b> la pile LAMP, les CMS, et toujours sauvegarder avant d'intervenir.</p>
+            <p class="pile mono">wordpress · apache · mariadb · php</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># étapes</h4><ol class="etapes"><li><span><strong>Installer WordPress</strong> sur une pile LAMP sous Ubuntu, avec une base et un utilisateur dédiés, et un virtual host.</span></li><li><span><strong>Mettre en place le thème et l'extension immobilière</strong> (biens en euros et en m²).</span></li><li><span><strong>Construire les pages</strong> et la navigation.</span></li><li><span><strong>Déléguer la gestion des biens</strong> à un rôle « Agent immobilier » créé sur mesure, sans lui donner les droits administrateur.</span></li><li><span><strong>Livrer</strong> un rapport, une documentation utilisateur et une vidéo tutoriel.</span></li></ol></div><div class="detail-bloc"><h4 class="mono"># difficulté rencontrée</h4><p>L'agent ne voyait pas le menu de gestion des biens : l'extension ne l'affichait qu'aux administrateurs. Plutôt que de lui donner tous les droits, j'ai ajouté un petit module (mu-plugin) qui crée une deuxième entrée vers la même page, accessible avec les droits de l'agent. Je n'ai rien modifié dans l'extension elle-même.</p></div><div class="detail-bloc"><h4 class="mono"># bonus sécurité</h4><p>Face à une faille critique de PHP : sauvegarde de la base et des fichiers, mise à jour de PHP 8.3, redémarrage d'Apache, mise à jour de WordPress, puis diagnostic d'un faux mode maintenance qui venait du cache du navigateur.</p></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="ecole">
+            <p class="projet-type mono">école</p>
+            <h3>CV en ligne en HTML et CSS</h3>
+            <p>Mon CV en ligne, mis en page uniquement en Flexbox, responsive et validé W3C. C'est la base de mon portfolio de cours.</p>
+            <p class="projet-appris"><b>Appris :</b> HTML sémantique, Flexbox, responsive et git.</p>
+            <p class="pile mono">html · css · flexbox</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># contraintes respectées</h4><ul class="liste"><li>Mise en page uniquement en Flexbox, sans float ni position absolue.</li><li>Responsive, avec un point de rupture à 900 px.</li><li>Code validé par le W3C.</li><li>Une trentaine de scénarios de modification en direct préparés pour l'oral.</li></ul></div></div>
+            </details>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="ecole">
+            <p class="projet-type mono">école · BUT</p>
+            <h3>SAÉ gestion de production</h3>
+            <p>En équipe, sur une simulation d'entreprise agroalimentaire : graphes Graphviz, outil d'aide à la décision sous tableur et programme d'optimisation du bénéfice.</p>
+            <p class="projet-appris"><b>Appris :</b> modéliser un problème et travailler en équipe.</p>
+            <p class="pile mono">graphviz · tableur</p>
+          </article>
+
+          <article class="projet verre apparition" data-categorie="perso">
+            <p class="projet-type mono">perso</p>
+            <h3>Jeu de casino en Lua</h3>
+            <p>Une machine à sous avec mes propres règles, puis un blackjack, pour apprendre un nouveau langage avec le framework LÖVE.</p>
+            <p class="projet-appris"><b>Appris :</b> la boucle de jeu, les entrées clavier et souris, et la gestion d'un état.</p>
+            <p class="pile mono">lua · löve</p>
+            <details class="detail">
+              <summary class="mono">voir le détail</summary>
+              <div class="detail-contenu"><div class="detail-bloc"><h4 class="mono"># comment il marche</h4><ol class="etapes"><li><span><strong>love.load :</strong> charger l'image de fond, la police, les crédits et la mise de départ.</span></li><li><span><strong>love.update :</strong> faire évoluer l'état du jeu.</span></li><li><span><strong>love.draw :</strong> dessiner le fond, les crédits, la grille de 3 colonnes et les boutons.</span></li><li><span><strong>Entrées :</strong> les flèches changent la mise, un bouton lance la machine.</span></li></ol><p>Les règles de gain, je les ai inventées moi-même. Prochaine étape : un blackjack.</p></div></div>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section">
+      <div class="conteneur">
+        <div class="contact verre apparition">
+          <p class="chemin">alessio@portfolio:~$ ssh contact</p>
+          <h2 class="titre-section">On <em>en parle</em> ?</h2>
+          <p class="contact-texte">Pour une question, un stage ou un projet, écris-moi par mail ou passe par mon GitHub.</p>
+          <div class="boutons">
+            <a href="https://github.com/alessio-schirru" class="bouton bouton-plein" target="_blank" rel="noopener">github.com/alessio-schirru ↗</a>
+            <!-- Mail caché aux robots : il est reconstitué par js/interactions.js (partie 6).
+                 Pour le changer : modifier data-nom (avant le @) et data-domaine (après le @). -->
+            <a href="#contact" id="lien-mail" class="bouton verre mono" data-nom="aschirru74" data-domaine="icloud.com">afficher mon mail</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur pied-contenu mono">
+      <span>© 2026 Alessio Schirru</span>
+      <span>fait main en HTML, CSS et JS</span>
+    </div>
+  </footer>
+
+  <script src="js/ciel.js"></script>
+  <script src="js/interactions.js"></script>
+</body>
+</html>
