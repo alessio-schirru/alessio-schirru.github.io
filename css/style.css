@@ -690,12 +690,98 @@ em {
 
 
 /* ---------- 12. Contact et pied de page ---------- */
+/* Veille technologique */
+.veille-intro { max-width: 70ch; margin-bottom: 32px; }
+.veille-sujet { margin: 0 0 10px; font-size: 21px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.35; }
+.veille-intro p:last-child { margin: 0; color: var(--couleur-texte-doux); }
+
+.veille-grille { display: flex; flex-wrap: wrap; gap: 16px; }
+.veille-info {
+  flex: 1 1 calc(33.333% - 16px);
+  min-width: 280px;
+  border-radius: var(--rayon);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.veille-meta { margin: 0 0 10px; font-size: 12px; color: var(--couleur-texte-faible); }
+.veille-meta span { color: var(--couleur-texte-doux); }
+.veille-info h3 { margin: 0 0 10px; font-weight: 500; font-size: 19px; line-height: 1.25; letter-spacing: -0.015em; }
+.veille-info > p { margin: 0 0 12px; font-size: 15px; color: var(--couleur-texte-doux); }
+.veille-impact { margin-top: auto !important; padding-top: 12px; border-top: 1px solid var(--couleur-trait); }
+.veille-impact b { font-weight: 500; color: var(--couleur-texte); }
+.veille-synthese .etapes { margin: 0; }
+.veille-synthese .etapes strong { margin-right: 0; }
+
+.veille-methode { margin-top: 16px; border-radius: var(--rayon); padding: 22px 26px; }
+.veille-methode h3 { margin: 0 0 14px; font-weight: 400; font-size: 14px; color: var(--couleur-texte-doux); }
+.veille-methode dl { margin: 0; display: flex; flex-wrap: wrap; gap: 12px 40px; }
+.veille-methode dl div { flex: 1 1 220px; }
+.veille-methode dt { font-family: var(--police-mono); font-size: 12px; color: var(--couleur-texte-faible); }
+.veille-methode dd { margin: 4px 0 0; font-size: 15px; color: var(--couleur-texte-doux); }
+
+/* Contact : texte et réseaux à gauche, formulaire à droite */
 .contact {
   border-radius: 34px;
   padding: 56px;
+  display: flex;
+  gap: 56px;
+  align-items: flex-start;
 }
+.contact-gauche { flex: 1 1 0; min-width: 0; }
 .contact .titre-section { margin-bottom: 18px; }
-.contact-texte { margin: 0; font-size: 18px; color: var(--couleur-texte-doux); max-width: 50ch; }
+.contact-texte { margin: 0; font-size: 18px; color: var(--couleur-texte-doux); max-width: 40ch; }
+
+.reseaux { display: flex; gap: 10px; margin-top: 28px; }
+.reseau {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--couleur-texte);
+  transition: transform 0.4s cubic-bezier(0.2, 1.4, 0.4, 1), background 0.3s, color 0.3s;
+}
+.reseau svg { width: 20px; height: 20px; fill: currentColor; }
+.reseau:hover { transform: translateY(-3px) scale(1.06); background: var(--couleur-accent); color: var(--couleur-sur-accent); }
+.reseau[href=""] { display: none; } /* réseau pas encore renseigné */
+
+.contact-mail { margin: 22px 0 0; font-size: 13px; color: var(--couleur-texte-faible); }
+.contact-mail a { color: var(--couleur-texte-doux); text-underline-offset: 3px; }
+
+/* Formulaire */
+.formulaire { flex: 1.2 1 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.champs-ligne { display: flex; gap: 14px; }
+.champs-ligne .champ { flex: 1; min-width: 0; }
+.champ { display: flex; flex-direction: column; gap: 6px; }
+.champ span { font-size: 12px; color: var(--couleur-texte-faible); }
+.champ input,
+.champ textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--couleur-trait);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--couleur-texte);
+  font-family: var(--police-texte);
+  font-size: 15px;
+  resize: vertical;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.champ input:focus,
+.champ textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08);
+}
+.piege { position: absolute; left: -9999px; }
+
+.formulaire-bas { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px; }
+.formulaire-bas .bouton { border: 0; cursor: pointer; font-family: var(--police-texte); }
+.formulaire-bas .bouton:disabled { opacity: 0.6; cursor: wait; transform: none; }
+.formulaire-etat { margin: 0; font-size: 13px; color: var(--couleur-texte-doux); }
 
 .pied { padding: 0 0 40px; }
 .pied-contenu {
@@ -725,6 +811,16 @@ em {
 .legal-bloc p:last-child { margin-bottom: 0; }
 .legal-bloc strong { font-weight: 500; color: var(--couleur-texte); }
 .legal-bloc a { color: var(--couleur-texte); text-underline-offset: 3px; }
+
+
+/* Page 404 */
+.page-404 { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; padding: 100px 0; }
+.page-404 .conteneur { width: 100%; }
+.erreur { border-radius: 34px; padding: 56px; max-width: 760px; }
+.erreur-sortie { margin: -4px 0 28px; font-size: 13px; color: var(--couleur-texte-doux); }
+.erreur .nom { font-size: clamp(56px, 10vw, 120px); }
+#chemin-demande { color: var(--couleur-texte); word-break: break-all; }
+@media (max-width: 560px) { .erreur { padding: 32px 24px; } }
 
 
 /* ---------- 13. Animations ---------- */
@@ -764,7 +860,8 @@ em {
   .methode li { flex: 1 1 calc(50% - 14px); }
   .frise-element { flex-direction: column; gap: 8px; }
   .frise-date { flex: none; padding-top: 0; }
-  .contact { padding: 36px 26px; }
+  .contact { padding: 36px 26px; flex-direction: column; gap: 36px; }
+  .formulaire { width: 100%; }
 }
 
 @media (max-width: 560px) {
@@ -772,7 +869,8 @@ em {
   .legal { padding-top: 110px; }
   .legal-bloc { min-width: 100%; }
   .methode li { flex-basis: 100%; }
-  .bloc, .projet { min-width: 100%; }
+  .bloc, .projet, .veille-info { min-width: 100%; }
+  .champs-ligne { flex-direction: column; }
   .barre-etat { border-radius: 20px; }
   .role, .a-propos-texte { font-size: 16px; }
 }

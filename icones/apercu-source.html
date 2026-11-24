@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- Source de l'image d'aperçu (icones/apercu.png, 1200 x 630).
+     Pour la régénérer : google-chrome --headless=new --hide-scrollbars --window-size=1200,630 --screenshot=icones/apercu.png icones/apercu-source.html -->
+<html lang="fr"><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../css/polices.css">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  .apercu { position: absolute; inset: 0; padding: 56px 72px; display: flex; flex-direction: column; }
+  .apercu .haut { display: flex; justify-content: space-between; align-items: center; }
+  .apercu .haut img { width: 64px; height: 64px; }
+  .apercu .barre-etat { font-size: 17px; }
+  .apercu .bas { margin-top: auto; }
+  .apercu .chemin { font-size: 18px; }
+  .apercu .nom { font-size: 132px; }
+  .apercu .ligne { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 26px; }
+  .apercu .role { margin: 0; font-size: 25px; max-width: 30ch; }
+  .apercu .url { font-family: var(--police-mono); font-size: 18px; color: var(--couleur-texte-faible); }
+</style></head>
+<body>
+  <canvas id="ciel"></canvas>
+  <div class="apercu">
+    <div class="haut">
+      <img src="logo-as-1024.png" alt="">
+      <div class="barre-etat verre"><span><i class="voyant"></i>en alternance</span><span><b>uptime</b> BTS SIO SISR</span><span><b>shell</b> bash</span></div>
+    </div>
+    <div class="bas">
+      <p class="chemin">alessio@portfolio:~$ whoami</p>
+      <h1 class="nom">Alessio <em>Schirru</em></h1>
+      <div class="ligne">
+        <p class="role">Linux, réseaux, Bash et cybersécurité.</p>
+        <span class="url">alessio-schirru.github.io</span>
+      </div>
+    </div>
+  </div>
+  <script src="../js/ciel.js"></script>
+</body></html>

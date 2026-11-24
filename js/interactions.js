@@ -6,6 +6,7 @@
    4. Animation des réalisations (détails, un seul ouvert à la fois)
    5. Filtres des réalisations
    6. Mail caché aux robots
+   7. Formulaire de contact
    Si ce fichier est retiré, tout le contenu reste visible.
    ========================================================= */
 
@@ -260,4 +261,47 @@ if (lienMail) {
   var adresse = lienMail.dataset.nom + "@" + lienMail.dataset.domaine;
   lienMail.textContent = adresse;
   lienMail.href = "mailto:" + adresse;
+}
+
+
+/* ---------- 7. Formulaire de contact ---------- */
+// Envoie le message à Web3Forms sans quitter la page, puis affiche le résultat.
+// Sans ce code, le formulaire marche quand même (redirection vers Web3Forms).
+var formulaire = document.getElementById("formulaire");
+
+if (formulaire) {
+  var etat = document.getElementById("formulaire-etat");
+  var boutonEnvoyer = document.getElementById("envoyer");
+
+  formulaire.addEventListener("submit", function (evenement) {
+    evenement.preventDefault();
+
+    // Clé pas encore renseignée : on prévient au lieu d'envoyer dans le vide
+    if (formulaire.access_key.value === "A-COMPLETER") {
+      etat.textContent = "Le formulaire n'est pas encore activé. Utilise le lien vers mon mail juste à gauche.";
+      return;
+    }
+
+    var donnees = new FormData(formulaire);
+    donnees.set("subject", "Portfolio : " + formulaire.objet.value);
+    donnees.set("name", formulaire.prenom.value + " " + formulaire.nom.value);
+
+    boutonEnvoyer.disabled = true;
+    etat.textContent = "Envoi en cours…";
+
+    fetch(formulaire.action, { method: "POST", body: donnees, headers: { Accept: "application/json" } })
+      .then(function (reponse) { return reponse.json(); })
+      .then(function (resultat) {
+        if (resultat.success) {
+          etat.textContent = "Message envoyé. Je te réponds dès que possible.";
+          formulaire.reset();
+        } else {
+          etat.textContent = "L'envoi a échoué : " + resultat.message + ". Réessaie ou écris-moi par mail.";
+        }
+      })
+      .catch(function () {
+        etat.textContent = "Pas de connexion au service d'envoi. Réessaie ou écris-moi par mail.";
+      })
+      .finally(function () { boutonEnvoyer.disabled = false; });
+  });
 }

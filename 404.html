@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page introuvable · Alessio Schirru</title>
+  <meta name="robots" content="noindex">
+  <!-- Chemins absolus (/...) : cette page peut s'afficher à n'importe quelle adresse du site -->
+  <link rel="icon" href="/icones/favicon.ico" sizes="any">
+  <link rel="icon" href="/icones/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/icones/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="/css/polices.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <canvas id="ciel" aria-hidden="true"></canvas>
+
+  <main class="page-404">
+    <div class="conteneur">
+      <div class="erreur verre">
+        <p class="chemin">alessio@portfolio:~$ cd <span id="chemin-demande">page-demandee</span></p>
+        <p class="erreur-sortie mono">bash: cd: no such file or directory</p>
+        <h1 class="nom">404<br><em>introuvable</em></h1>
+        <p class="role">Cette page n'existe pas, ou elle a changé d'adresse.</p>
+        <div class="boutons">
+          <a href="/" class="bouton bouton-plein">cd ~ (retour à l'accueil)</a>
+          <a href="/#realisations" class="bouton verre">Voir mes réalisations</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Affiche l'adresse demandée dans la fausse commande
+    document.getElementById("chemin-demande").textContent = decodeURIComponent(location.pathname);
+  </script>
+  <script src="/js/ciel.js"></script>
+</body>
+</html>
