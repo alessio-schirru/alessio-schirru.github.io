@@ -708,6 +708,26 @@ em {
 }
 
 
+.pied a { color: var(--couleur-texte-doux); text-underline-offset: 3px; }
+.pied a:hover { color: var(--couleur-texte); }
+
+/* Page mentions légales */
+.legal { padding-top: 130px; }
+.legal-grille { display: flex; flex-wrap: wrap; gap: 16px; }
+.legal-bloc {
+  flex: 1 1 calc(50% - 16px);
+  min-width: 280px;
+  border-radius: var(--rayon);
+  padding: 24px 26px;
+}
+.legal-bloc h2 { margin: 0 0 12px; font-weight: 400; font-size: 14px; color: var(--couleur-texte-doux); }
+.legal-bloc p { margin: 0 0 10px; font-size: 15px; color: var(--couleur-texte-doux); }
+.legal-bloc p:last-child { margin-bottom: 0; }
+.legal-bloc strong { font-weight: 500; color: var(--couleur-texte); }
+.legal-bloc a { color: var(--couleur-texte); text-underline-offset: 3px; }
+.legal-suite { margin-top: 90px; }
+
+
 /* ---------- 13. Animations ---------- */
 @keyframes pulsation {
   50% { opacity: 0.35; box-shadow: 0 0 2px var(--couleur-accent); }
@@ -750,6 +770,8 @@ em {
 
 @media (max-width: 560px) {
   .section { padding: 80px 0; }
+  .legal { padding-top: 110px; }
+  .legal-bloc { min-width: 100%; }
   .methode li { flex-basis: 100%; }
   .bloc, .projet { min-width: 100%; }
   .barre-etat { border-radius: 20px; }
