@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- Source du CV (copie modifiée du CV Canva, sans téléphone ni adresse postale).
+     Pour régénérer le PDF après une modification, depuis le dossier portfolio-alessio :
+     google-chrome --headless=new --no-pdf-header-footer --print-to-pdf=cv/Alessio-Schirru-CV.pdf cv/cv.html -->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Alessio Schirru</title>
+  <link rel="stylesheet" href="polices-cv.css">
+  <style>
+    /* Couleurs et polices du CV d'origine (Canva) */
+    :root {
+      --fond: #f8f5f0;
+      --texte: #3b3b3b;
+      --doux: #5c5c5c;
+      --accent: #c29a6b;
+      --trait: #3b3b3b;
+      --titre: "League Spartan", "Arial", sans-serif;
+      --corps: "Lato", "Helvetica", sans-serif;
+    }
+    @page { size: A4; margin: 0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 297mm; overflow: hidden; }
+    body {
+      width: 210mm; height: 297mm; overflow: hidden;
+      background: var(--fond); color: var(--texte);
+      font-family: var(--corps); font-size: 10pt; line-height: 1.4;
+      -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      padding: 11mm 15mm 0;
+    }
+    h1, h2, h3 { font-family: var(--titre); margin: 0; }
+
+    /* En-tête */
+    .entete { display: flex; justify-content: space-between; align-items: center; gap: 10mm; }
+    .entete h1 { font-size: 34pt; font-weight: 700; letter-spacing: 0.5pt; line-height: 1; }
+    .entete .poste { font-family: var(--titre); font-weight: 700; font-size: 13.5pt; margin-top: 6mm; }
+    .entete img { width: 34mm; height: auto; display: block; }
+
+    .accroche {
+      margin: 5mm 0 6mm; padding: 2.2mm 0;
+      border-top: 0.6pt solid var(--trait); border-bottom: 0.6pt solid var(--trait);
+      text-align: center; font-size: 9.6pt; color: var(--doux);
+    }
+
+    /* Deux colonnes */
+    .colonnes { display: flex; gap: 9mm; }
+    .gauche { flex: 0 0 66mm; padding-right: 7mm; border-right: 0.6pt solid var(--trait); }
+    .droite { flex: 1; min-width: 0; }
+    h2 { font-size: 17pt; font-weight: 700; margin: 0 0 3mm; }
+    section { margin-bottom: 5.5mm; }
+
+    .contact { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2.4mm; }
+    .contact li { display: flex; align-items: center; gap: 3mm; font-size: 9.6pt; }
+    .contact svg { width: 5.6mm; height: 5.6mm; flex: none; }
+
+    ul.puces { margin: 0; padding-left: 5mm; display: flex; flex-direction: column; gap: 1.2mm; }
+    ul.puces li { font-size: 9.6pt; }
+    .interets p { margin: 0 0 1.4mm; font-size: 9.6pt; }
+
+    .element { margin-bottom: 3.6mm; }
+    .element h3 { font-size: 11pt; font-weight: 700; font-family: var(--corps); }
+    .element h3 span { font-weight: 400; }
+    .element .lieu { font-style: italic; margin: 0.5mm 0 1.5mm; }
+    .element ul { margin: 0; padding-left: 5mm; }
+    .element li { font-size: 9.6pt; }
+    .note { font-style: italic; font-weight: 700; margin: 2mm 0 1mm; }
+  </style>
+</head>
+<body>
+
+  <header class="entete">
+    <div>
+      <h1>ALESSIO SCHIRRU</h1>
+      <p class="poste">APPRENTI TECHNICIEN INFORMATIQUE · BTS SIO SISR</p>
+    </div>
+    <img src="photo.png" alt="Photo d'Alessio Schirru">
+  </header>
+
+  <p class="accroche">Curieux et passionné par l'administration systèmes, les réseaux et la cybersécurité, je suis en BTS SIO option SISR en alternance chez Eltis, avec le Campus Saint-Michel IT d'Annecy. Ma première année de BUT Informatique m'a confirmé mon attrait pour Linux, les scripts et les infrastructures. Engagé et rigoureux, j'apprends le métier sur le terrain et je documente tout ce que je fais.</p>
+
+  <div class="colonnes">
+    <div class="gauche">
+      <section>
+        <h2>CONTACT</h2>
+        <ul class="contact">
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#c29a6b"/><path d="M6.5 8.5h11v7h-11z" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M6.5 8.5l5.5 4 5.5-4" fill="none" stroke="#fff" stroke-width="1.3"/></svg>alessio_schirru@icloud.com</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#c29a6b"/><circle cx="12" cy="12" r="5.5" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M6.5 12h11M12 6.5c-2 2.8-2 8.2 0 11M12 6.5c2 2.8 2 8.2 0 11" fill="none" stroke="#fff" stroke-width="1.1"/></svg>alessio-schirru.github.io</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#c29a6b"/><path d="M9 16.5l-3-4.5 3-4.5M15 7.5l3 4.5-3 4.5" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>github.com/alessio-schirru</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#c29a6b"/><text x="12" y="16" text-anchor="middle" font-family="Lato" font-weight="700" font-size="10" fill="#fff">20</text></svg>20 ans</li>
+          <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#c29a6b"/><rect x="6" y="8" width="12" height="8" rx="1.2" fill="none" stroke="#fff" stroke-width="1.3"/><path d="M8.5 11h3M8.5 13.5h5" stroke="#fff" stroke-width="1.1"/></svg>Permis B</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>COMPÉTENCES</h2>
+        <ul class="puces">
+          <li>Administration systèmes (Linux, Windows)</li>
+          <li>Scripting Bash, notions de PowerShell</li>
+          <li>Réseaux : SSH, nmap, bases TCP/IP</li>
+          <li>Cybersécurité : labos et audit d'un site WordPress</li>
+          <li>Git et GitHub</li>
+          <li>Documentation technique</li>
+          <li>Capacités d'organisation</li>
+          <li>Communication</li>
+          <li>Polyvalence</li>
+          <li>Anglais B2</li>
+        </ul>
+      </section>
+
+      <section class="interets">
+        <h2>CENTRES D'INTÉRÊT</h2>
+        <p>Kickboxing (6 ans), double champion de France 2022 et 2023</p>
+        <p>Jeux vidéo stratégiques et compétitifs</p>
+        <p>Développement de mes propres outils</p>
+      </section>
+    </div>
+
+    <div class="droite">
+      <section>
+        <h2>EXPÉRIENCE PROFESSIONNELLE</h2>
+
+        <div class="element">
+          <h3>Apprenti technicien informatique <span>· depuis nov. 2026</span></h3>
+          <p class="lieu">Eltis · Meythet</p>
+          <ul>
+            <li>Analyse des besoins des services</li>
+            <li>Conception d'un outil de demandes d'assistance (Microsoft 365)</li>
+            <li>Automatisation du déploiement des postes (Bash, Ansible), en test</li>
+          </ul>
+        </div>
+
+        <div class="element">
+          <h3>Équipier polyvalent <span>· 2024 à 2026</span></h3>
+          <p class="lieu">Carrefour City · Meythet</p>
+          <ul>
+            <li>Réception et mise en rayon des produits</li>
+            <li>Gestion des stocks</li>
+            <li>Accueil clientèle</li>
+          </ul>
+        </div>
+
+        <div class="element">
+          <h3>Agent de quais <span>· été 2025</span></h3>
+          <p class="lieu">CSD · Alby-sur-Chéran</p>
+          <ul>
+            <li>Gestion de la marchandise et des camions</li>
+            <li>Vidage et remplissage des camions</li>
+          </ul>
+        </div>
+
+        <div class="element">
+          <h3>Équipier</h3>
+          <p class="lieu">McDonald's</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>FORMATION</h2>
+
+        <div class="element">
+          <h3>BTS SIO option SISR, en alternance <span>· 2026 à 2028</span></h3>
+          <p class="lieu">Campus Saint-Michel IT · Annecy</p>
+        </div>
+
+        <div class="element">
+          <h3>BUT Informatique, 1re année <span>· 2025/2026</span></h3>
+          <p class="lieu">Université Savoie Mont Blanc · Annecy</p>
+          <ul>
+            <li>Administration Linux et Windows, machines virtuelles</li>
+            <li>Programmation : C#, WPF, orienté objet</li>
+            <li>Bases de données et SQL, développement web en PHP</li>
+            <li>Services réseau sur Raspberry Pi</li>
+          </ul>
+        </div>
+
+        <div class="element">
+          <h3>Baccalauréat technologique <span>· 2021 à 2024</span></h3>
+          <p class="lieu">Lycée Louis Lachenal · Argonay</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+</html>

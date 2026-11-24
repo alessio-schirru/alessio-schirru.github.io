@@ -747,6 +747,7 @@ em {
 .reseau:hover { transform: translateY(-3px) scale(1.06); background: var(--couleur-accent); color: var(--couleur-sur-accent); }
 .reseau[href=""] { display: none; } /* réseau pas encore renseigné */
 
+.contact-cv { margin-top: 22px; }
 .contact-mail { margin: 22px 0 0; font-size: 13px; color: var(--couleur-texte-faible); }
 .contact-mail a { color: var(--couleur-texte-doux); text-underline-offset: 3px; }
 
