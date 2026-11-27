@@ -5,8 +5,7 @@
    3. Carte en vedette : fait défiler les 3 projets
    4. Animation des réalisations (détails, un seul ouvert à la fois)
    5. Filtres des réalisations
-   6. Mail caché aux robots
-   7. Formulaire de contact
+   6. Formulaire de contact
    Si ce fichier est retiré, tout le contenu reste visible.
    ========================================================= */
 
@@ -31,12 +30,15 @@ document.querySelectorAll(".apparition").forEach(function (el) {
 
 /* ---------- 2. Menu actif ---------- */
 var liensMenu = document.querySelectorAll(".menu-pilule a");
+var menuSection = document.getElementById("menu-section"); // libellé du bouton mobile
 
 var observateurSections = new IntersectionObserver(function (entrees) {
   entrees.forEach(function (entree) {
     if (entree.isIntersecting) {
       liensMenu.forEach(function (lien) {
-        lien.classList.toggle("actif", lien.getAttribute("href") === "#" + entree.target.id);
+        var actif = lien.getAttribute("href") === "#" + entree.target.id;
+        lien.classList.toggle("actif", actif);
+        if (actif && menuSection) menuSection.textContent = lien.textContent;
       });
     }
   });
@@ -45,6 +47,31 @@ var observateurSections = new IntersectionObserver(function (entrees) {
 document.querySelectorAll("main section[id]").forEach(function (section) {
   observateurSections.observe(section);
 });
+
+// Menu mobile : le bouton affiche la section en cours et ouvre la liste des liens
+var menu = document.getElementById("menu");
+var menuBouton = document.getElementById("menu-bouton");
+
+function ouvrirMenu(ouvrir) {
+  menu.classList.toggle("ouvert", ouvrir);
+  menuBouton.setAttribute("aria-expanded", ouvrir ? "true" : "false");
+}
+
+if (menuBouton) {
+  menuBouton.addEventListener("click", function () {
+    ouvrirMenu(!menu.classList.contains("ouvert"));
+  });
+  // un lien choisi, un clic ailleurs ou la touche Échap referment le menu
+  liensMenu.forEach(function (lien) {
+    lien.addEventListener("click", function () { ouvrirMenu(false); });
+  });
+  document.addEventListener("click", function (evenement) {
+    if (!menu.contains(evenement.target)) ouvrirMenu(false);
+  });
+  document.addEventListener("keydown", function (evenement) {
+    if (evenement.key === "Escape") ouvrirMenu(false);
+  });
+}
 
 
 /* ---------- 3. Carte en vedette (page d'accueil seulement) ---------- */
@@ -252,19 +279,7 @@ filtres.forEach(function (bouton) {
 });
 
 
-/* ---------- 6. Mail caché aux robots ---------- */
-// L'adresse n'est jamais écrite en entier dans le HTML : les robots qui
-// lisent le code de la page ne la trouvent pas. Le script la reconstitue
-// pour les vrais visiteurs.
-var lienMail = document.getElementById("lien-mail");
-if (lienMail) {
-  var adresse = lienMail.dataset.nom + "@" + lienMail.dataset.domaine;
-  lienMail.textContent = adresse;
-  lienMail.href = "mailto:" + adresse;
-}
-
-
-/* ---------- 7. Formulaire de contact ---------- */
+/* ---------- 6. Formulaire de contact ---------- */
 // Envoie le message à Web3Forms sans quitter la page, puis affiche le résultat.
 // Sans ce code, le formulaire marche quand même (redirection vers Web3Forms).
 var formulaire = document.getElementById("formulaire");
@@ -278,7 +293,7 @@ if (formulaire) {
 
     // Clé pas encore renseignée : on prévient au lieu d'envoyer dans le vide
     if (formulaire.access_key.value === "A-COMPLETER") {
-      etat.textContent = "Le formulaire n'est pas encore activé. Utilise le lien vers mon mail juste à gauche.";
+      etat.textContent = "Le formulaire n'est pas encore activé. Passe par GitHub en attendant.";
       return;
     }
 
@@ -296,11 +311,11 @@ if (formulaire) {
           etat.textContent = "Message envoyé. Je te réponds dès que possible.";
           formulaire.reset();
         } else {
-          etat.textContent = "L'envoi a échoué : " + resultat.message + ". Réessaie ou écris-moi par mail.";
+          etat.textContent = "L'envoi a échoué : " + resultat.message + ". Réessaie dans quelques minutes.";
         }
       })
       .catch(function () {
-        etat.textContent = "Pas de connexion au service d'envoi. Réessaie ou écris-moi par mail.";
+        etat.textContent = "Pas de connexion au service d'envoi. Vérifie ta connexion et réessaie.";
       })
       .finally(function () { boutonEnvoyer.disabled = false; });
   });

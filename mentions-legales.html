@@ -20,8 +20,13 @@
   <canvas id="ciel" aria-hidden="true"></canvas>
 
   <!-- ============ MENU ============ -->
-  <header class="menu">
-    <nav class="menu-pilule verre" aria-label="Menu principal">
+  <header class="menu" id="menu">
+    <!-- Bouton visible seulement sur mobile : affiche la section en cours et ouvre le menu -->
+    <button type="button" class="menu-bouton verre mono" id="menu-bouton" aria-expanded="false" aria-controls="menu-liens">
+      <span id="menu-section">~/mentions-légales</span>
+      <span class="menu-icone" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav class="menu-pilule verre" id="menu-liens" aria-label="Menu principal">
       <a href="index.html">~/accueil</a>
       <a href="#mentions" class="actif">~/mentions-légales</a>
       <a href="#confidentialite">~/confidentialité</a>
