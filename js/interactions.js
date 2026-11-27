@@ -262,11 +262,32 @@ document.querySelectorAll(".detail summary").forEach(function (titre) {
 /* ---------- 5. Filtres des réalisations ---------- */
 // Changer de catégorie ferme les détails ouverts, avec la même animation
 var filtres = document.querySelectorAll(".filtre");
+var pastille = document.querySelector(".filtre-pastille");
+
+// Place la pastille blanche exactement sous le bouton choisi
+function placerPastille(bouton) {
+  if (!pastille) return;
+  pastille.style.width = bouton.offsetWidth + "px";
+  pastille.style.transform = "translateX(" + bouton.offsetLeft + "px)";
+}
+
+if (pastille) {
+  var filtreActif = document.querySelector(".filtre.actif");
+  // première position sans animation
+  pastille.style.transition = "none";
+  placerPastille(filtreActif);
+  pastille.offsetWidth; // force le navigateur à appliquer la position avant de réactiver l'animation
+  pastille.style.transition = "";
+  // si la largeur change (rotation du téléphone, polices chargées), on recale
+  window.addEventListener("resize", function () { placerPastille(document.querySelector(".filtre.actif")); });
+  document.fonts && document.fonts.ready.then(function () { placerPastille(document.querySelector(".filtre.actif")); });
+}
 
 filtres.forEach(function (bouton) {
   bouton.addEventListener("click", function () {
     var choix = bouton.dataset.filtre;
     filtres.forEach(function (b) { b.classList.toggle("actif", b === bouton); });
+    placerPastille(bouton);
 
     animerCartes(function () {
       fermerDetails(null);

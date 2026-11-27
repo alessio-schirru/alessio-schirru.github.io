@@ -592,6 +592,24 @@ em {
 .filtre:hover { color: var(--couleur-texte); }
 .filtre.actif { background: var(--couleur-accent); color: var(--couleur-sur-accent); }
 
+/* Avec le JS, la couleur blanche n'est plus sur le bouton mais sur une pastille
+   qui glisse d'un filtre à l'autre, avec un léger ressort */
+.filtre-pastille { display: none; }
+.js .filtre { position: relative; z-index: 1; transition: color 0.35s; }
+.js .filtre.actif { background: transparent; }
+.js .filtre-pastille {
+  display: block;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: calc(100% - 10px);
+  width: 0;
+  border-radius: 999px;
+  background: var(--couleur-accent);
+  transition: transform 0.55s cubic-bezier(0.2, 1.2, 0.4, 1), width 0.55s cubic-bezier(0.2, 1.2, 0.4, 1);
+}
+.filtres { position: relative; }
+
 .projets {
   display: flex;
   flex-wrap: wrap;
@@ -932,6 +950,9 @@ em {
   .methode li { flex-basis: 100%; }
   .bloc, .projet, .veille-info { min-width: 100%; }
   .champs-ligne { flex-direction: column; }
+  /* Filtres sur une seule ligne, répartis sur toute la largeur */
+  .filtres { display: flex; flex-wrap: nowrap; width: 100%; }
+  .filtre { flex: 1 1 auto; padding: 7px 6px; font-size: 12px; }
   .barre-etat { border-radius: 20px; }
   .role, .a-propos-texte { font-size: 16px; }
 }
